@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Studio: Design & Convert</title> <!-- Changed Title back to simpler version -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: IBM Plex Sans (similar to SAP's 72 font) and Poppins (for contrast/headings) -->
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons (using Fiori-like icons where possible, otherwise general) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="SAP_logo.png" alt="SAP Logo" class="logo">
+            <h1>SVG Studio: Design & Convert</h1> <!-- Changed Main Heading back to simpler version -->
+        </div>
+        <div class="header-right">
+            <p>Empowering your digital presence.</p>
+            <img src="Team SIX logo.png" alt="Team SIX Logo" class="logo">
+        </div>
+    </header>
+
+    <main class="container">
+        <nav class="tabs">
+            <button class="tab-button active" data-tab="logoGenerator">
+                <i class="fas fa-magic"></i> Dynamic SVG Element Creator
+            </button>
+            <button class="tab-button" data-tab="imageConverter">
+                <i class="fas fa-image"></i> Image to SVG Wrapper
+            </button>
+        </nav>
+
+        <!-- Logo Generator Section -->
+        <section id="logoGenerator" class="tab-content active">
+            <div class="controls-panel">
+                <h2>Dynamic SVG Element Creator</h2>
+                <p class="info-note">
+                    <i class="fas fa-info-circle"></i> This tool allows you to generate customizable SVG elements of various shapes, sizes, and colors for any purpose, including logos or placeholders.
+                </p>
+
+                <div class="control-group">
+                    <label for="logoShape">Shape:</label>
+                    <select id="logoShape">
+                        <option value="circle">Circle</option>
+                        <option value="rectangle">Rectangle</option>
+                        <option value="triangle">Triangle</option>
+                    </select>
+                </div>
+
+                <div class="control-group dimensions">
+                    <label for="logoWidth">Width (px):</label>
+                    <input type="number" id="logoWidth" value="100" min="10" max="500">
+                    <label for="logoHeight">Height (px):</label>
+                    <input type="number" id="logoHeight" value="100" min="10" max="500">
+                </div>
+
+                <div class="control-group">
+                    <label for="fillColor">Fill Color:</label>
+                    <input type="color" id="fillColor" value="#0A6ED1"> <!-- SAP Fiori Blue -->
+                </div>
+
+                <div class="control-group">
+                    <label for="strokeColor">Stroke Color:</label>
+                    <input type="color" id="strokeColor" value="#32363A"> <!-- SAP Fiori Gray -->
+                </div>
+
+                <div class="control-group">
+                    <label for="strokeWidth">Stroke Width:</label>
+                    <input type="number" id="strokeWidth" value="2" min="0" max="10">
+                </div>
+
+                <div class="control-group">
+                    <label for="logoText">Element Text:</label>
+                    <input type="text" id="logoText" value="SAP Fiori">
+                </div>
+
+                <div class="control-group">
+                    <label for="textColor">Text Color:</label>
+                    <input type="color" id="textColor" value="#F8F8F8">
+                </div>
+
+                <div class="control-group">
+                    <label for="fontSize">Font Size (px):</label>
+                    <input type="number" id="fontSize" value="16" min="6" max="1000">
+                </div>
+
+                <div class="action-buttons">
+                    <button id="downloadLogoBtn" class="button primary">
+                        <i class="fas fa-download"></i> Download SVG Element
+                    </button>
+                    <button id="resetLogoBtn" class="button secondary">
+                        <i class="fas fa-sync-alt"></i> Reset Element
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <h2>Live Preview</h2>
+                <div class="svg-wrapper" id="logoSvgWrapper">
+                    <svg id="dynamicLogo" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- SVG content will be dynamically generated here -->
+                    </svg>
+                </div>
+                <p class="dimensions-display" id="currentLogoDimensions">100x100 px</p>
+            </div>
+        </section>
+
+        <!-- Image to SVG Wrapper Section -->
+        <section id="imageConverter" class="tab-content">
+            <div class="controls-panel">
+                <h2>Image to SVG Wrapper</h2>
+                <p class="info-note">
+                    <i class="fas fa-info-circle"></i> This tool embeds your raster image (JPG, PNG, GIF, WebP) inside an SVG container. It does NOT convert it to vector graphics.
+                </p>
+
+                <div class="control-group">
+                    <label for="imageUpload">Upload Image:</label>
+                    <input type="file" id="imageUpload" accept="image/*">
+                </div>
+
+                <div class="control-group dimensions">
+                    <label for="imageWidth">SVG Width (px):</label>
+                    <input type="number" id="imageWidth" value="200" min="10" max="1000">
+                    <label for="imageHeight">SVG Height (px):</label>
+                    <input type="number" id="imageHeight" value="200" min="10" max="1000">
+                </div>
+
+                <div class="action-buttons">
+                    <button id="downloadImageSvgBtn" class="button primary" disabled>
+                        <i class="fas fa-download"></i> Download Wrapped SVG
+                    </button>
+                    <button id="resetImageBtn" class="button secondary">
+                        <i class="fas fa-times-circle"></i> Clear Image
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <h2>Image Preview</h2>
+                <div class="svg-wrapper" id="imageSvgWrapper">
+                    <svg id="imageSvgPreview" width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Image will be embedded here -->
+                    </svg>
+                    <p id="imagePreviewPlaceholder">Upload an image to see its SVG wrapper preview.</p>
+                </div>
+                <p class="dimensions-display" id="currentImageDimensions">200x200 px</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© With LOVE ❤️ Demo Build Team.</p> <!-- Changed Footer Text -->
+    </footer>
+
+    <!-- Download confirmation message -->
+    <div id="downloadMessage" class="download-message">
+        <i class="fas fa-check-circle"></i> Download successful!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

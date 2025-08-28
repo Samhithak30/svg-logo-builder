@@ -1,0 +1,7 @@
+---
+applications:
+- name: svg-logo-builder-1
+  path: .
+  memory: 256M
+  buildpacks:
+  - staticfile_buildpack
